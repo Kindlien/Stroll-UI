@@ -82,7 +82,6 @@ struct CarouselView: View {
                                         .cornerRadius(20)
                                     Spacer()
                                 }
-
                             }
                             Spacer()
                             // Action text

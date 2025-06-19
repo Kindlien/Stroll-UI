@@ -36,19 +36,29 @@ struct HeaderView: View {
 
             // TODO: Functionality Work In Progress, Replace Arc_Temp with ArcProgressView when ready
             // ArcProgressView(progress: 0.9)
-
-            ZStack {
-                // Profile picture
-                Image("profilePic_icon")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 35, height: 35)
-                    .clipShape(Circle())
-                Image("arc_temp")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 35, height: 35)
-                    .padding(.bottom, 10)
+            VStack(spacing: 0){
+                ZStack {
+                    // Profile picture
+                    Image("profilePic_icon")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 35, height: 35)
+                        .clipShape(Circle())
+                    Image("arc_temp")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 35, height: 35)
+                        .padding(.bottom, 10)
+                }
+                Text("90")
+                    .font(.system(size: 10))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 8)
+                    .background(
+                        Capsule()
+                            .fill(Color(hex: "#12161F"))
+                            .frame(width: 42, height: 18.4)
+                    )
             }
         }
         .padding(.horizontal)
