@@ -38,16 +38,24 @@ struct HeaderView: View {
             // ArcProgressView(progress: 0.9)
             ZStack {
                 // Profile picture
+                Image("blur_profile")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+
                 Image("profilePic_icon")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 35, height: 35)
                     .clipShape(Circle())
+
                 Image("arc_temp")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 35, height: 35)
                     .padding(.bottom, 10)
+
                 VStack {
                     Spacer()
                 Text("90")
