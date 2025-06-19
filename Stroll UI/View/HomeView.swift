@@ -1,0 +1,78 @@
+//
+//  HomeView.swift
+//  Stroll UI
+//
+//  Created by William Kindlien Gunawan on 18/06/25.
+//
+
+import SwiftUI
+
+struct HomeView: View {
+    @StateObject private var viewModel = HomeViewModel()
+
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    // Header
+                    HeaderView()
+                        .padding(.top, 20)
+                        .padding(.bottom, 25)
+
+                    // Carousel
+                    CarouselView(items: viewModel.carouselItems)
+                        .padding(.bottom, 5)
+
+                    VStack(alignment: .leading, spacing: 0) {
+                        // Tab Selector
+                        VStack(alignment: .leading) {
+                            HStack {
+                                ForEach(0..<viewModel.tabs.count, id: \.self) { index in
+                                    Text(viewModel.tabs[index])
+                                        .font(.headline)
+                                        .foregroundColor(viewModel.selectedTab == index ? .white : .gray)
+                                        .overlay(
+                                            Rectangle()
+                                                .frame(height: 2)
+                                                .foregroundColor(viewModel.selectedTab == index ? .white : .clear)
+                                                .offset(y: 5),
+                                            alignment: .bottom
+                                        )
+                                        .onTapGesture {
+                                            viewModel.selectedTab = index
+                                        }
+                                }
+                                Spacer()
+                            }
+                            .padding(.bottom, 5)
+                            Text("The ice is broken. Time to hit it off")
+                                .font(.system(size: 12))
+                                .italic()
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 20)
+                        .padding(.top, 20)
+
+                        // Chat List
+                        ChatListView(chats: viewModel.chats)
+
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 2)
+                    .background(Color(hex: "#08070D"))
+                }
+            }
+
+            // Footer
+            FooterView(selectedTab: $viewModel.selectedScreen)
+        }
+        .foregroundColor(.white)
+        .background(
+            Image("background")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea(.all)
+        )
+    }
+}

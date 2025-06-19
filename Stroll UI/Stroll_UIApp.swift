@@ -11,7 +11,7 @@ import SwiftUI
 struct Stroll_UIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
