@@ -26,10 +26,10 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         // Tab Selector
                         VStack(alignment: .leading) {
-                            HStack {
+                            HStack(spacing: 20) {
                                 ForEach(0..<viewModel.tabs.count, id: \.self) { index in
                                     Text(viewModel.tabs[index])
-                                        .font(.headline)
+                                        .font(.system(size: 22, weight: .bold))
                                         .foregroundColor(viewModel.selectedTab == index ? .white : .gray)
                                         .overlay(
                                             Rectangle()
@@ -51,7 +51,7 @@ struct HomeView: View {
                                 .foregroundColor(.gray)
                         }
                         .padding(.horizontal)
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 10)
                         .padding(.top, 20)
 
                         // Chat List

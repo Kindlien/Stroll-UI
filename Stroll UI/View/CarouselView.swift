@@ -82,6 +82,9 @@ struct CarouselView: View {
                                         .cornerRadius(20)
                                     Spacer()
                                 }
+                            } else {
+                                Color.clear
+                                    .frame(width: 20, height: 20)
                             }
                             Spacer()
                             // Action text

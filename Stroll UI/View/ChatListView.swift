@@ -17,13 +17,14 @@ struct ChatListView: View {
                     Image(chat.user.profileImage)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 52, height: 52)
                         .clipShape(Circle())
 
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 2) {
                         HStack {
                             Text(chat.user.name)
-                                .font(.headline)
+                                .font(.system(size: 16, weight: .bold))
+                                .lineLimit(1)
 
                             if chat.user.isNewChat {
                                 Image("ChatTag_new")
@@ -36,14 +37,13 @@ struct ChatListView: View {
                                     .scaledToFill()
                                     .frame(width: 64, height: 16)
                             }
-                        }
+                        }.frame(maxWidth: .infinity, alignment: .leading)
 
                         if !chat.user.isVoiceMessage {
                             Text(chat.user.lastMessage)
-                                .font(.subheadline)
-                                .fontWeight(chat.user.hasSeen ? .regular : .bold)
-                                .foregroundColor(.white)
-                                .lineLimit(1)
+                                .font(.system(size: 14, weight: chat.user.hasSeen ? .regular : .semibold))
+                                .foregroundColor(chat.user.hasSeen ? Color(hex: "#818181") : Color(hex: "#E5E5E5"))
+                                .lineLimit(2)
                         } else {
                             Image("voiceMessage_temp")
                                 .resizable()
@@ -57,7 +57,7 @@ struct ChatListView: View {
                     VStack(alignment: .trailing, spacing: 4) {
                         Text(chat.user.timestamp)
                             .font(.caption)
-                            .foregroundColor(chat.user.timestamp == "Wed" ? .gray : Color(hex: "#B5B2FF"))
+                            .foregroundColor(chat.user.timestamp == "Wed" ? Color(hex: "#A8AFB7") : Color(hex: "#555390"))
 
                         if chat.user.isNewChat {
                             Image("ChatTag_favorite")
@@ -76,13 +76,13 @@ struct ChatListView: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 12)
+                .padding(.bottom, 12)
+                .padding(.top, 8)
 
                 Divider()
                     .background(Color.gray.opacity(0.3))
                     .padding(.leading, 62)
             }
-            .frame(height: 37)
         }
     }
 }
