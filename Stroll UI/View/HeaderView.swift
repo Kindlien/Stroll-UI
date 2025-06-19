@@ -21,7 +21,7 @@ struct HeaderView: View {
                             .fill(Color(hex: "#B5B2FF"))
                             .frame(width: 20, height: 20)
                         Text("7")
-                            .font(.system(size: 8))
+                            .font(.system(size: 10, weight: .bold))
                             .foregroundColor(.black)
                     }
                 }
@@ -29,7 +29,7 @@ struct HeaderView: View {
                 Text("Make your move, they are waiting 🎵")
                     .font(.system(size: 12))
                     .italic()
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color(hex: "#A8AFB7"))
             }
 
             Spacer()
@@ -58,8 +58,8 @@ struct HeaderView: View {
                 VStack {
                     Spacer()
                 Text("90")
-                    .font(.system(size: 10))
-                    .foregroundColor(.white)
+                        .font(.system(size: 10.8, weight: .bold))
+                    .foregroundColor(Color(hex: "#E5E5E5"))
                     .padding(.horizontal, 8)
                     .background(
                         Capsule()

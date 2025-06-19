@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8F0FB7E32E047C7200A208B0 /* ProximaNova-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F0FB7CD2E047C7200A208B0 /* ProximaNova-bold.otf */; };
+		8F0FB7E42E047C7200A208B0 /* ProximaNova-reguler.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8F0FB7CE2E047C7200A208B0 /* ProximaNova-reguler.otf */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		8F0FB7832E03123A00A208B0 /* Stroll UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stroll UI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0FB7CD2E047C7200A208B0 /* ProximaNova-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-bold.otf"; sourceTree = "<group>"; };
+		8F0FB7CE2E047C7200A208B0 /* ProximaNova-reguler.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-reguler.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +39,8 @@
 		8F0FB77A2E03123A00A208B0 = {
 			isa = PBXGroup;
 			children = (
+				8F0FB7CE2E047C7200A208B0 /* ProximaNova-reguler.otf */,
+				8F0FB7CD2E047C7200A208B0 /* ProximaNova-bold.otf */,
 				8F0FB7852E03123A00A208B0 /* Stroll UI */,
 				8F0FB7842E03123A00A208B0 /* Products */,
 			);
@@ -109,6 +118,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F0FB7E32E047C7200A208B0 /* ProximaNova-bold.otf in Resources */,
+				8F0FB7E42E047C7200A208B0 /* ProximaNova-reguler.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

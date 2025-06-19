@@ -85,7 +85,7 @@ extension User {
         lastMessage: "New chat",
         timestamp: "6:21 pm",
         unreadCount: nil,
-        profileImage: "jessica_profile_tempv2",
+        profileImage: "sila_profile_temp",
         isFavorite: false,
         isNewChat: false,
         isYourMove: true,

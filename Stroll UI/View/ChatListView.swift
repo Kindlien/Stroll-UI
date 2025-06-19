@@ -67,7 +67,7 @@ struct ChatListView: View {
 
                         } else if let count = chat.user.unreadCount {
                             Text("\(count)")
-                                .font(.caption2)
+                                .font(.system(size: 10, weight: .bold))
                                 .foregroundColor(.black)
                                 .padding(5)
                                 .background(Circle().fill(Color(hex: "#B5B2FF")))

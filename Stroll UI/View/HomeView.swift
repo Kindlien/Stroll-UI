@@ -30,12 +30,17 @@ struct HomeView: View {
                                 ForEach(0..<viewModel.tabs.count, id: \.self) { index in
                                     Text(viewModel.tabs[index])
                                         .font(.system(size: 22, weight: .bold))
-                                        .foregroundColor(viewModel.selectedTab == index ? .white : .gray)
+                                        .foregroundColor(viewModel.selectedTab == index ? .white : Color(hex: "#5F5F60"))
                                         .overlay(
-                                            Rectangle()
-                                                .frame(height: 2)
-                                                .foregroundColor(viewModel.selectedTab == index ? .white : .clear)
-                                                .offset(y: 5),
+                                            VStack {
+                                                Spacer()
+                                                HStack {
+                                                    Rectangle()
+                                                        .frame(height: 2)
+                                                        .foregroundColor(viewModel.selectedTab == index ? .white : .clear)
+                                                    Spacer(minLength: 5)
+                                                }
+                                            },
                                             alignment: .bottom
                                         )
                                         .onTapGesture {
@@ -44,11 +49,11 @@ struct HomeView: View {
                                 }
                                 Spacer()
                             }
-                            .padding(.bottom, 5)
+                            .padding(.bottom, 7)
                             Text("The ice is broken. Time to hit it off")
                                 .font(.system(size: 12))
                                 .italic()
-                                .foregroundColor(.gray)
+                                .foregroundColor(Color(hex: "#A8AFB7"))
                         }
                         .padding(.horizontal)
                         .padding(.bottom, 10)

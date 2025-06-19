@@ -79,7 +79,7 @@ struct CarouselView: View {
                             if item.madeAMove {
                                 Text("📣 They made a move!")
                                     .font(.system(size: 9, weight: .semibold))
-                                    .foregroundColor(.white)
+                                    .foregroundColor(Color(hex: "#E5E5E5"))
                                     .padding(.vertical, 4)
                                     .padding(.horizontal, 10)
                                     .background(Color(hex: "#0B0C0D"))
@@ -91,21 +91,23 @@ struct CarouselView: View {
                             } else if item.madeAMoveShort {
                                 HStack {
                                     Text("📣")
-                                        .font(.system(size: 9, weight: .semibold))
-                                        .frame(width: 20, height: 20)
+                                        .font(.system(size: 12, weight: .semibold))
+                                        .frame(width: 24, height: 24)
                                         .background(Color(hex: "#0B0C0D"))
                                         .cornerRadius(20)
+                                        .padding(.horizontal, 10)
                                     Spacer()
                                 }
                             } else {
-                                Color.clear
-                                    .frame(width: 20, height: 20)
+//                                Color.clear
+//                                    .frame(width: 10, height: 10)
                             }
                             Spacer()
                             // Action text
                             if item.showActionText && item.isHidden {
                                 Text("Tap to answer")
-                                    .font(.custom("ProximaNova-bold", size: 10).weight(.bold))
+                                    .font(.system(size: 10))
+                                    .fontWeight(.bold)
                                     .foregroundColor(Color(hex: "#A8AFB7"))
                                     .frame(maxWidth: .infinity)
                                     .multilineTextAlignment(.center)
@@ -121,14 +123,16 @@ struct CarouselView: View {
                                     .multilineTextAlignment(.center)
 
                                 Text(item.subtitle)
-                                    .font(.custom("ProximaNova-bold", size: 10))
-                                    .foregroundColor(Color(hex: "#B5B2FF"))
+                                    .font(.custom("ProximaNova-reguler", size: 10))
+                                    .foregroundColor(Color(hex: "#CFCFFE"))
+                                    .opacity(0.7)
                                     .padding(.horizontal, 4)
                                     .cornerRadius(4)
                                     .multilineTextAlignment(.center)
                             }
                         }
-                        .padding()
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 4)
                         .frame(width: 145, height: 205)
                     }
                 }
