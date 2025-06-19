@@ -21,7 +21,7 @@ struct CarouselView: View {
                             //                                item.image
                             //                                    .resizable()
                             //                                    .scaledToFill()
-                            //                                    .frame(width: 152, height: 205)
+                            //                                    .frame(width: 145, height: 205)
                             //                                    .clipped()
                             //                                    .blur(radius: 20)
                             //                                    .cornerRadius(20)
@@ -39,14 +39,14 @@ struct CarouselView: View {
                             //                                                endPoint: .top
                             //                                            )
                             //                                }
-                            //                                .frame(width: 152, height: 205)
+                            //                                .frame(width: 145, height: 205)
                             //                                .cornerRadius(20)
                             //                            }
 
                             item.imageHiddenTemp
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 152, height: 205)
+                                .frame(width: 145, height: 205)
                                 .clipped()
                                 .cornerRadius(20)
                         } else {
@@ -54,7 +54,7 @@ struct CarouselView: View {
                                 item.image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 152, height: 205)
+                                    .frame(width: 145, height: 205)
                                     .clipped()
                                     .cornerRadius(20)
 
@@ -69,7 +69,7 @@ struct CarouselView: View {
                                     endPoint: .bottom
                                 )
                                 .cornerRadius(20)
-                                .frame(width: 152, height: 205)
+                                .frame(width: 145, height: 205)
                             }
                         }
 
@@ -135,8 +135,8 @@ struct CarouselView: View {
                             }
                         }
                         .padding(.vertical, 10)
-                        .padding(.horizontal, 8)
-                        .frame(width: 152, height: 205)
+                        .padding(.horizontal, 4)
+                        .frame(width: 145, height: 205)
                     }
                 }
             }
