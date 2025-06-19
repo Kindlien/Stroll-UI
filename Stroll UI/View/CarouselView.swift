@@ -50,12 +50,27 @@ struct CarouselView: View {
                                 .clipped()
                                 .cornerRadius(20)
                         } else {
-                            item.image
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 145, height: 205)
-                                .clipped()
+                            ZStack(alignment: .bottom) {
+                                item.image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 145, height: 205)
+                                    .clipped()
+                                    .cornerRadius(20)
+
+                                // Gradient overlay
+                                LinearGradient(
+                                    gradient: Gradient(stops: [
+                                        .init(color: Color(hex: "#0B0D0E").opacity(0.0), location: 0.0071),
+                                        .init(color: Color(hex: "#0B0D0E"), location: 0.5),
+                                        .init(color: Color(hex: "#0B0D0E"), location: 0.9929)
+                                    ]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
                                 .cornerRadius(20)
+                                .frame(width: 145, height: 205)
+                            }
                         }
 
 

@@ -77,7 +77,7 @@ struct ChatListView: View {
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 12)
-                .padding(.top, 8)
+                .padding(.top, 6)
 
                 Divider()
                     .background(Color.gray.opacity(0.3))

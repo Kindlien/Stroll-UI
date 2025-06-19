@@ -42,7 +42,6 @@ struct HeaderView: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 40, height: 40)
-                    .clipShape(Circle())
 
                 Image("profilePic_icon")
                     .resizable()
