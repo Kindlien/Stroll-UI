@@ -15,14 +15,17 @@ struct HeaderView: View {
                 HStack(spacing: 8) {
                     Text("Your Turn")
                         .font(.system(size: 22, weight: .bold))
+                        .foregroundColor(Color(hex: "#F5F5F5"))
 
                     ZStack {
                         Circle()
-                            .fill(Color(hex: "#B5B2FF"))
-                            .frame(width: 20, height: 20)
+                            .fill(Color(hex: "#B49AD1"))
+                            .frame(width: 16, height: 16)
+
                         Text("7")
                             .font(.system(size: 10, weight: .bold))
-                            .foregroundColor(.black)
+                            .foregroundColor(Color(hex: "#0E0E0E"))
+
                     }
                 }
 

@@ -17,36 +17,36 @@ struct CarouselView: View {
                     ZStack {
                         if item.isHidden {
                             // TODO: Implement the blur functionality, replace temp hidden image with this functionality when done, WIP 90%
-//                            ZStack {
-//                                item.image
-//                                    .resizable()
-//                                    .scaledToFill()
-//                                    .frame(width: 145, height: 205)
-//                                    .clipped()
-//                                    .blur(radius: 20)
-//                                    .cornerRadius(20)
-//
-//
-//                                // Bottom gradient overlay (approx. 40% height)
-//                                VStack {
-//                                    Spacer()
-//                                    LinearGradient(
-//                                                gradient: Gradient(colors: [
-//                                                    Color.black.opacity(0.6),
-//                                                    Color.black.opacity(0.0)
-//                                                ]),
-//                                                startPoint: .bottom,
-//                                                endPoint: .top
-//                                            )
-//                                }
-//                                .frame(width: 145, height: 205)
-//                                .cornerRadius(20)
-//                            }
+                            //                            ZStack {
+                            //                                item.image
+                            //                                    .resizable()
+                            //                                    .scaledToFill()
+                            //                                    .frame(width: 152, height: 205)
+                            //                                    .clipped()
+                            //                                    .blur(radius: 20)
+                            //                                    .cornerRadius(20)
+                            //
+                            //
+                            //                                // Bottom gradient overlay (approx. 40% height)
+                            //                                VStack {
+                            //                                    Spacer()
+                            //                                    LinearGradient(
+                            //                                                gradient: Gradient(colors: [
+                            //                                                    Color.black.opacity(0.6),
+                            //                                                    Color.black.opacity(0.0)
+                            //                                                ]),
+                            //                                                startPoint: .bottom,
+                            //                                                endPoint: .top
+                            //                                            )
+                            //                                }
+                            //                                .frame(width: 152, height: 205)
+                            //                                .cornerRadius(20)
+                            //                            }
 
                             item.imageHiddenTemp
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 145, height: 205)
+                                .frame(width: 152, height: 205)
                                 .clipped()
                                 .cornerRadius(20)
                         } else {
@@ -54,7 +54,7 @@ struct CarouselView: View {
                                 item.image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 145, height: 205)
+                                    .frame(width: 152, height: 205)
                                     .clipped()
                                     .cornerRadius(20)
 
@@ -69,7 +69,7 @@ struct CarouselView: View {
                                     endPoint: .bottom
                                 )
                                 .cornerRadius(20)
-                                .frame(width: 145, height: 205)
+                                .frame(width: 152, height: 205)
                             }
                         }
 
@@ -89,19 +89,22 @@ struct CarouselView: View {
                                     .minimumScaleFactor(0.5)
                                     .frame(minWidth: 0, maxWidth: 110, minHeight: 19, maxHeight: 19)
                             } else if item.madeAMoveShort {
+
                                 HStack {
-                                    Text("📣")
-                                        .font(.system(size: 12, weight: .semibold))
-                                        .frame(width: 24, height: 24)
-                                        .background(Color(hex: "#0B0C0D"))
-                                        .cornerRadius(20)
-                                        .padding(.horizontal, 10)
+                                    ZStack{
+                                        Circle()
+                                            .fill(Color(hex: "#0B0C0D"))
+                                            .frame(width: 24, height: 24)
+                                        Text("📣")
+                                            .font(.system(size: 12, weight: .semibold))
+                                            .frame(width: 12, height: 12)
+                                            .cornerRadius(20)
+                                            .padding(.horizontal, 5)
+                                    }
                                     Spacer()
                                 }
-                            } else {
-//                                Color.clear
-//                                    .frame(width: 10, height: 10)
                             }
+
                             Spacer()
                             // Action text
                             if item.showActionText && item.isHidden {
@@ -132,8 +135,8 @@ struct CarouselView: View {
                             }
                         }
                         .padding(.vertical, 10)
-                        .padding(.horizontal, 4)
-                        .frame(width: 145, height: 205)
+                        .padding(.horizontal, 8)
+                        .frame(width: 152, height: 205)
                     }
                 }
             }

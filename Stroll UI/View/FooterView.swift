@@ -49,7 +49,7 @@ struct FooterView: View {
                                             RoundedRectangle(cornerRadius: 15)
                                                 .stroke(Color(hex: "#111315"), lineWidth: 1.4)
                                         )
-                                        .offset(x: 8, y: -2)
+                                        .offset(x: 6, y: -4)
                                 }
                             }
                             

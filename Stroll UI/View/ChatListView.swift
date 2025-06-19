@@ -56,7 +56,7 @@ struct ChatListView: View {
 
                     VStack(alignment: .trailing, spacing: 4) {
                         Text(chat.user.timestamp)
-                            .font(.caption)
+                            .font(.system(size: 12, weight: .semibold))
                             .foregroundColor(chat.user.timestamp == "Wed" ? Color(hex: "#A8AFB7") : Color(hex: "#555390"))
 
                         if chat.user.isNewChat {

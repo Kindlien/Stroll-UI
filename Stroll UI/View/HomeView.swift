@@ -38,10 +38,11 @@ struct HomeView: View {
                                                     Rectangle()
                                                         .frame(height: 2)
                                                         .foregroundColor(viewModel.selectedTab == index ? .white : .clear)
+
                                                     Spacer(minLength: 5)
                                                 }
-                                            },
-                                            alignment: .bottom
+                                            }
+                                            .padding(.top, 25)
                                         )
                                         .onTapGesture {
                                             viewModel.selectedTab = index
@@ -49,7 +50,8 @@ struct HomeView: View {
                                 }
                                 Spacer()
                             }
-                            .padding(.bottom, 7)
+                            .padding(.bottom, 10)
+
                             Text("The ice is broken. Time to hit it off")
                                 .font(.system(size: 12))
                                 .italic()
