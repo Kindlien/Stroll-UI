@@ -12,7 +12,7 @@ struct HeaderView: View {
         HStack {
             // Left side
             VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 8) {
+                HStack(spacing: 12) {
                     Text("Your Turn")
                         .font(.system(size: 22, weight: .bold))
                         .foregroundColor(Color(hex: "#F5F5F5"))

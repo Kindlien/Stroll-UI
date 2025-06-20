@@ -21,7 +21,7 @@ struct FooterView: View {
                 Rectangle()
                     .fill(Color.black.opacity(1))
                     .frame(height: 60)
-                    .blur(radius: 20)
+                    .blur(radius: 15)
                     .offset(y: -30)
                 
                 // Footer content

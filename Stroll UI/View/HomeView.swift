@@ -16,12 +16,12 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     // Header
                     HeaderView()
-                        .padding(.top, 20)
-                        .padding(.bottom, 25)
+                        .padding(.top, 10)
+                        .padding(.bottom, 15)
 
                     // Carousel
                     CarouselView(items: viewModel.carouselItems)
-                        .padding(.bottom, 5)
+                        .padding(.bottom, 12)
 
                     VStack(alignment: .leading, spacing: 0) {
                         // Tab Selector
@@ -58,7 +58,7 @@ struct HomeView: View {
                                 .foregroundColor(Color(hex: "#A8AFB7"))
                         }
                         .padding(.horizontal)
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 17)
                         .padding(.top, 20)
 
                         // Chat List

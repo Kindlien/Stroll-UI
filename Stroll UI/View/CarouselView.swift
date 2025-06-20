@@ -21,7 +21,7 @@ struct CarouselView: View {
                             //                                item.image
                             //                                    .resizable()
                             //                                    .scaledToFill()
-                            //                                    .frame(width: 145, height: 205)
+                            //                                    .frame(width: 145 * 1.05, height: 205 * 1.05)
                             //                                    .clipped()
                             //                                    .blur(radius: 20)
                             //                                    .cornerRadius(20)
@@ -39,14 +39,14 @@ struct CarouselView: View {
                             //                                                endPoint: .top
                             //                                            )
                             //                                }
-                            //                                .frame(width: 145, height: 205)
+                            //                                .frame(width: 145 * 1.05, height: 205 * 1.05)
                             //                                .cornerRadius(20)
                             //                            }
 
                             item.imageHiddenTemp
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 145, height: 205)
+                                .frame(width: 145 * 1.05, height: 205 * 1.05)
                                 .clipped()
                                 .cornerRadius(20)
                         } else {
@@ -54,7 +54,7 @@ struct CarouselView: View {
                                 item.image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 145, height: 205)
+                                    .frame(width: 145 * 1.05, height: 205 * 1.05)
                                     .clipped()
                                     .cornerRadius(20)
 
@@ -69,7 +69,7 @@ struct CarouselView: View {
                                     endPoint: .bottom
                                 )
                                 .cornerRadius(20)
-                                .frame(width: 145, height: 205)
+                                .frame(width: 145 * 1.05, height: 205 * 1.05)
                             }
                         }
 
@@ -78,6 +78,7 @@ struct CarouselView: View {
                             // Made a move display
                             if item.madeAMove {
                                 Text("📣 They made a move!")
+                                    .kerning(-0.3) // tighter letter spacing
                                     .font(.system(size: 9, weight: .semibold))
                                     .foregroundColor(Color(hex: "#E5E5E5"))
                                     .padding(.vertical, 4)
@@ -86,21 +87,20 @@ struct CarouselView: View {
                                     .cornerRadius(10)
                                     .shadow(color: Color.gray.opacity(0.6), radius: 15.3)
                                     .lineLimit(1)
-                                    .minimumScaleFactor(0.5)
-                                    .frame(minWidth: 0, maxWidth: 110, minHeight: 19, maxHeight: 19)
+                                //  .minimumScaleFactor(0.5)
+                                    .frame(minWidth: 0, maxWidth: 110 * 1.1, minHeight: 19, maxHeight: 19)
                             } else if item.madeAMoveShort {
-
                                 HStack {
                                     ZStack{
                                         Circle()
                                             .fill(Color(hex: "#0B0C0D"))
                                             .frame(width: 24, height: 24)
+
                                         Text("📣")
-                                            .font(.system(size: 12, weight: .semibold))
-                                            .frame(width: 12, height: 12)
-                                            .cornerRadius(20)
-                                            .padding(.horizontal, 5)
+                                            .font(.system(size: 12))
                                     }
+                                    .padding(.horizontal, 5)
+
                                     Spacer()
                                 }
                             }
@@ -136,7 +136,7 @@ struct CarouselView: View {
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 4)
-                        .frame(width: 145, height: 205)
+                        .frame(width: 145 * 1.05, height: 205 * 1.05)
                     }
                 }
             }

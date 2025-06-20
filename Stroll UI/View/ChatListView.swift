@@ -50,9 +50,10 @@ struct ChatListView: View {
                                 .scaledToFill()
                                 .frame(width: 105, height: 19)
                         }
+                        Spacer()
                     }
 
-                    Spacer()
+
 
                     VStack(alignment: .trailing, spacing: 4) {
                         Text(chat.user.timestamp)
@@ -76,7 +77,7 @@ struct ChatListView: View {
                     }
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 12)
+                .padding(.bottom, 3)
                 .padding(.top, 6)
 
                 Divider()
