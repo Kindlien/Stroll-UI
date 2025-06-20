@@ -21,7 +21,7 @@ struct HomeView: View {
 
                     // Carousel
                     CarouselView(items: viewModel.carouselItems)
-                        .padding(.bottom, 12)
+                        .padding(.bottom, 13)
 
                     VStack(alignment: .leading, spacing: 0) {
                         // Tab Selector
@@ -58,7 +58,7 @@ struct HomeView: View {
                                 .foregroundColor(Color(hex: "#A8AFB7"))
                         }
                         .padding(.horizontal)
-                        .padding(.bottom, 17)
+                        .padding(.bottom, 19)
                         .padding(.top, 20)
 
                         // Chat List

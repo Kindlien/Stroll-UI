@@ -80,9 +80,15 @@ struct ChatListView: View {
                 .padding(.bottom, 3)
                 .padding(.top, 6)
 
-                Divider()
-                    .background(Color.gray.opacity(0.3))
-                    .padding(.leading, 62)
+                HStack {
+                    Spacer(minLength: 73)
+
+                    Rectangle()
+                        .fill(Color(hex: "#292B2E"))
+                        .frame(height: 0.5)
+
+                    Spacer(minLength: 15)
+                }
             }
         }
     }

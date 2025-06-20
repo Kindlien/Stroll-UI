@@ -128,14 +128,14 @@ struct CarouselView: View {
                                 Text(item.subtitle)
                                     .font(.custom("ProximaNova-reguler", size: 10))
                                     .foregroundColor(Color(hex: "#CFCFFE"))
-                                    .opacity(0.7)
+                                    .opacity(item.isHidden ? 0.65 : 1)
                                     .padding(.horizontal, 4)
                                     .cornerRadius(4)
                                     .multilineTextAlignment(.center)
                             }
                         }
                         .padding(.vertical, 10)
-                        .padding(.horizontal, 4)
+                        .padding(.horizontal, 7)
                         .frame(width: 145 * 1.05, height: 205 * 1.05)
                     }
                 }

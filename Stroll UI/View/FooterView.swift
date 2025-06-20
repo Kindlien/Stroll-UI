@@ -21,9 +21,9 @@ struct FooterView: View {
                 Rectangle()
                     .fill(Color.black.opacity(1))
                     .frame(height: 60)
-                    .blur(radius: 15)
-                    .offset(y: -30)
-                
+                    .blur(radius: 20)
+                    .offset(y: -35)
+
                 // Footer content
                 HStack(spacing: 5) {
                     ForEach(0..<tabs.count, id: \.self) { index in
