@@ -76,12 +76,11 @@ struct CarouselView: View {
                                     endPoint: .bottom
                                 )
                                 .cornerRadius(20)
-                                .frame(width: (145 * 1.05) * scaleFactorWidth, height: (205 * 1.05) * scaleFactorWidth)
+                                .frame(width: (145 * 1.05) * scaleFactorWidth, height: (155 * 1.05) * scaleFactorWidth)
                             }
                         }
 
-
-                        VStack {
+                        VStack(spacing: 23  * scaleFactorWidth) {
                             // Made a move display
                             if item.madeAMoveShort {
                                 HStack {
@@ -100,15 +99,13 @@ struct CarouselView: View {
 
                                 Spacer()
                                 // Action text
-                                if item.showActionText && item.isHidden {
-                                    Text("Tap to answer")
-                                        .font(.system(size: 10 * scaleFactorWidth))
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color(hex: "#A8AFB7"))
-                                        .frame(maxWidth: .infinity)
-                                        .multilineTextAlignment(.center)
-                                        .opacity(0.5)
-                                }
+                                Text("Tap to answer")
+                                    .font(.system(size: 10 * scaleFactorWidth))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(hex: "#A8AFB7"))
+                                    .frame(maxWidth: .infinity)
+                                    .multilineTextAlignment(.center)
+                                    .opacity(item.showActionText && item.isHidden ? 0.5 : 0)
                             } else {
                                 Text("📣 They made a move!")
                                     .kerning(-0.3) // tighter letter spacing
@@ -126,18 +123,14 @@ struct CarouselView: View {
 
                                 Spacer()
                                 // Action text
-                                if item.showActionText && item.isHidden {
-                                    Text("Tap to answer")
-                                        .font(.system(size: 10 * scaleFactorWidth))
-                                        .fontWeight(.bold)
-                                        .foregroundColor(Color(hex: "#A8AFB7"))
-                                        .frame(maxWidth: .infinity)
-                                        .multilineTextAlignment(.center)
-                                        .opacity(0.5)
-                                }
+                                Text("Tap to answer")
+                                    .font(.system(size: 10 * scaleFactorWidth))
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(hex: "#A8AFB7"))
+                                    .frame(maxWidth: .infinity)
+                                    .multilineTextAlignment(.center)
+                                    .opacity(item.showActionText && item.isHidden ? 0.5 : 0)
                             }
-
-                            Spacer()
 
                             VStack(spacing: 5 * scaleFactorWidth) {
                                 Spacer()
@@ -160,7 +153,7 @@ struct CarouselView: View {
                             }
                             .frame(height: 80 * scaleFactorWidth)
                         }
-                        .padding(.vertical, 12 * scaleFactorWidth)
+                        .padding(.vertical, 50 * scaleFactorWidth)
                         .padding(.horizontal, 5 * scaleFactorWidth)
                         .frame(width: (145 * 1.05) * scaleFactorWidth, height: (205 * 1.05) * scaleFactorWidth)
                     }
