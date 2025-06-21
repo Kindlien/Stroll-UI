@@ -83,20 +83,7 @@ struct CarouselView: View {
 
                         VStack {
                             // Made a move display
-                            if item.madeAMove {
-                                Text("📣 They made a move!")
-                                    .kerning(-0.3) // tighter letter spacing
-                                    .font(.system(size: 9 * scaleFactorWidth, weight: .semibold))
-                                    .foregroundColor(Color(hex: "#E5E5E5"))
-                                    .padding(.vertical, 4 * scaleFactorWidth)
-                                    .padding(.horizontal, 10 * scaleFactorWidth)
-                                    .background(Color(hex: "#0B0C0D"))
-                                    .cornerRadius(10)
-                                    .shadow(color: Color.gray.opacity(0.6), radius: 15.3)
-                                    .lineLimit(1)
-                                //  .minimumScaleFactor(0.5)
-                                    .frame(minWidth: 0, maxWidth: (110 * 1.1) * scaleFactorWidth, minHeight: 19 * scaleFactorWidth, maxHeight: 19 * scaleFactorWidth)
-                            } else if item.madeAMoveShort {
+                            if item.madeAMoveShort {
                                 HStack {
                                     ZStack{
                                         Circle()
@@ -110,23 +97,50 @@ struct CarouselView: View {
 
                                     Spacer()
                                 }
+
+                                Spacer()
+                                // Action text
+                                if item.showActionText && item.isHidden {
+                                    Text("Tap to answer")
+                                        .font(.system(size: 10 * scaleFactorWidth))
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color(hex: "#A8AFB7"))
+                                        .frame(maxWidth: .infinity)
+                                        .multilineTextAlignment(.center)
+                                        .opacity(0.5)
+                                }
+                            } else {
+                                Text("📣 They made a move!")
+                                    .kerning(-0.3) // tighter letter spacing
+                                    .font(.system(size: 9 * scaleFactorWidth, weight: .semibold))
+                                    .foregroundColor(Color(hex: "#E5E5E5"))
+                                    .padding(.vertical, 4 * scaleFactorWidth)
+                                    .padding(.horizontal, 10 * scaleFactorWidth)
+                                    .background(Color(hex: "#0B0C0D"))
+                                    .cornerRadius(10)
+                                    .shadow(color: Color.gray.opacity(0.6), radius: 15.3)
+                                    .lineLimit(1)
+                                //  .minimumScaleFactor(0.5)
+                                    .frame(minWidth: 0, maxWidth: (110 * 1.1) * scaleFactorWidth, minHeight: 19 * scaleFactorWidth, maxHeight: 19 * scaleFactorWidth)
+                                    .opacity(item.madeAMove ? 1 : 0)
+
+                                Spacer()
+                                // Action text
+                                if item.showActionText && item.isHidden {
+                                    Text("Tap to answer")
+                                        .font(.system(size: 10 * scaleFactorWidth))
+                                        .fontWeight(.bold)
+                                        .foregroundColor(Color(hex: "#A8AFB7"))
+                                        .frame(maxWidth: .infinity)
+                                        .multilineTextAlignment(.center)
+                                        .opacity(0.5)
+                                }
                             }
 
                             Spacer()
-                            // Action text
-                            if item.showActionText && item.isHidden {
-                                Text("Tap to answer")
-                                    .font(.system(size: 10 * scaleFactorWidth))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color(hex: "#A8AFB7"))
-                                    .frame(maxWidth: .infinity)
-                                    .multilineTextAlignment(.center)
-                                    .opacity(0.5)
-                            }
 
-                            Spacer()
-
-                            VStack(spacing: 4 * scaleFactorWidth) {
+                            VStack(spacing: 5 * scaleFactorWidth) {
+                                Spacer()
                                 Text(item.title)
                                     .font(.system(size: 15 * scaleFactorWidth).weight(.bold))
                                     .foregroundColor(.white)
@@ -138,14 +152,15 @@ struct CarouselView: View {
                                     .opacity(item.isHidden ? 0.65 : 1)
                                     .padding(.horizontal,
                                              scaleFactorWidth >= 1.1 ? 15 :  scaleFactorWidth > 1.0 ? 12 * scaleFactorWidth :
-                                                scaleFactorWidth == 1.0 ? (isSimulator ? 12 * scaleFactorWidth : 5 * scaleFactorWidth) :
-                                                5 * scaleFactorWidth
+                                                scaleFactorWidth == 1.0 ? (isSimulator ? 12 * scaleFactorWidth : 7 * scaleFactorWidth) :
+                                                10 * scaleFactorWidth
                                     )
                                     .cornerRadius(4)
                                     .multilineTextAlignment(.center)
                             }
+                            .frame(height: 80 * scaleFactorWidth)
                         }
-                        .padding(.vertical, 10 * scaleFactorWidth)
+                        .padding(.vertical, 12 * scaleFactorWidth)
                         .padding(.horizontal, 5 * scaleFactorWidth)
                         .frame(width: (145 * 1.05) * scaleFactorWidth, height: (205 * 1.05) * scaleFactorWidth)
                     }
