@@ -11,75 +11,79 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 0) {
-                    // Header
-                    HeaderView()
-                        .padding(.top, 10)
-                        .padding(.bottom, 15)
-
-                    // Carousel
-                    CarouselView(items: viewModel.carouselItems)
-                        .padding(.bottom, 13)
-
+        GeometryReader { geometry in
+            let scaleFactorWidth = geometry.size.width / 390 // iphone 14 base
+            let scaleFactorHeight = geometry.size.height / 844 // iphone 14 base
+            ZStack(alignment: .bottom) {
+                ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
-                        // Tab Selector
-                        VStack(alignment: .leading) {
-                            HStack(spacing: 20) {
-                                ForEach(0..<viewModel.tabs.count, id: \.self) { index in
-                                    Text(viewModel.tabs[index])
-                                        .font(.system(size: 22, weight: .bold))
-                                        .foregroundColor(viewModel.selectedTab == index ? .white : Color(hex: "#5F5F60"))
-                                        .overlay(
-                                            VStack {
-                                                Spacer()
-                                                HStack {
-                                                    Rectangle()
-                                                        .frame(height: 2)
-                                                        .foregroundColor(viewModel.selectedTab == index ? .white : .clear)
+                        // Header
+                        HeaderView(scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
+                            .padding(.top, 10 * scaleFactorHeight)
+                            .padding(.bottom, 15 * scaleFactorHeight)
 
-                                                    Spacer(minLength: 5)
+                        // Carousel
+                        CarouselView(items: viewModel.carouselItems, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
+                            .padding(.bottom, 13 * scaleFactorHeight)
+
+                        VStack(alignment: .leading, spacing: 0) {
+                            // Tab Selector
+                            VStack(alignment: .leading) {
+                                HStack(spacing: 20 * scaleFactorWidth) {
+                                    ForEach(0..<viewModel.tabs.count, id: \.self) { index in
+                                        Text(viewModel.tabs[index])
+                                            .font(.system(size: 22 * scaleFactorWidth, weight: .bold))
+                                            .foregroundColor(viewModel.selectedTab == index ? .white : Color(hex: "#5F5F60"))
+                                            .overlay(
+                                                VStack {
+                                                    Spacer()
+                                                    HStack {
+                                                        Rectangle()
+                                                            .frame(height: 2 * scaleFactorHeight)
+                                                            .foregroundColor(viewModel.selectedTab == index ? .white : .clear)
+
+                                                        Spacer(minLength: 5 * scaleFactorWidth)
+                                                    }
                                                 }
+                                                    .padding(.top, 25 * scaleFactorHeight)
+                                            )
+                                            .onTapGesture {
+                                                viewModel.selectedTab = index
                                             }
-                                            .padding(.top, 25)
-                                        )
-                                        .onTapGesture {
-                                            viewModel.selectedTab = index
-                                        }
+                                    }
+                                    Spacer()
                                 }
-                                Spacer()
+                                .padding(.bottom, 10 * scaleFactorHeight)
+
+                                Text("The ice is broken. Time to hit it off")
+                                    .font(.system(size: 12 * scaleFactorWidth))
+                                    .italic()
+                                    .foregroundColor(Color(hex: "#A8AFB7"))
                             }
-                            .padding(.bottom, 10)
+                            .padding(.horizontal)
+                            .padding(.bottom, 19 * scaleFactorHeight)
+                            .padding(.top, 20 * scaleFactorHeight)
 
-                            Text("The ice is broken. Time to hit it off")
-                                .font(.system(size: 12))
-                                .italic()
-                                .foregroundColor(Color(hex: "#A8AFB7"))
+                            // Chat List
+                            ChatListView(chats: viewModel.chats, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
+
+                            Spacer()
                         }
-                        .padding(.horizontal)
-                        .padding(.bottom, 19)
-                        .padding(.top, 20)
-
-                        // Chat List
-                        ChatListView(chats: viewModel.chats)
-
-                        Spacer()
+                        .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 2)
+                        .background(Color(hex: "#08070D"))
                     }
-                    .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height / 2)
-                    .background(Color(hex: "#08070D"))
                 }
-            }
 
-            // Footer
-            FooterView(selectedTab: $viewModel.selectedScreen)
+                // Footer
+                FooterView(selectedTab: $viewModel.selectedScreen, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
+            }
+            .foregroundColor(.white)
+            .background(
+                Image("background")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea(.all)
+            )
         }
-        .foregroundColor(.white)
-        .background(
-            Image("background")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea(.all)
-        )
     }
 }
