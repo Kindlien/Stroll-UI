@@ -11,6 +11,11 @@ struct CarouselView: View {
     let items: [CarouselItem]
     let scaleFactorWidth: CGFloat
     let scaleFactorHeight: CGFloat
+#if targetEnvironment(simulator)
+    let isSimulator = true
+#else
+    let isSimulator = false
+#endif
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -133,7 +138,7 @@ struct CarouselView: View {
                                     .opacity(item.isHidden ? 0.65 : 1)
                                     .padding(.horizontal,
                                              scaleFactorWidth >= 1.1 ? 15 :  scaleFactorWidth > 1.0 ? 12 * scaleFactorWidth :
-                                                scaleFactorWidth == 1.0 ? 5 * scaleFactorWidth :
+                                                scaleFactorWidth == 1.0 ? (isSimulator ? 12 * scaleFactorWidth : 5 * scaleFactorWidth) :
                                                 5 * scaleFactorWidth
                                     )
                                     .cornerRadius(4)
