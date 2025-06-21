@@ -132,9 +132,9 @@ struct CarouselView: View {
                                     .foregroundColor(Color(hex: "#CFCFFE"))
                                     .opacity(item.isHidden ? 0.65 : 1)
                                     .padding(.horizontal,
-                                        scaleFactorWidth >= 1.1 ? 15 :
-                                        scaleFactorWidth >= 1.0 ? 12 * scaleFactorWidth :
-                                                                  10 * scaleFactorWidth
+                                             scaleFactorWidth >= 1.1 ? 15 :  scaleFactorWidth > 1.0 ? 12 * scaleFactorWidth :
+                                                scaleFactorWidth == 1.0 ? 5 * scaleFactorWidth :
+                                                5 * scaleFactorWidth
                                     )
                                     .cornerRadius(4)
                                     .multilineTextAlignment(.center)
