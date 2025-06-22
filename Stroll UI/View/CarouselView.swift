@@ -96,16 +96,6 @@ struct CarouselView: View {
 
                                     Spacer()
                                 }
-
-                                Spacer()
-                                // Action text
-                                Text("Tap to answer")
-                                    .font(.system(size: 10 * scaleFactorWidth))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color(hex: "#A8AFB7"))
-                                    .frame(maxWidth: .infinity)
-                                    .multilineTextAlignment(.center)
-                                    .opacity(item.showActionText && item.isHidden ? 0.5 : 0)
                             } else {
                                 Text("📣 They made a move!")
                                     .kerning(-0.3) // tighter letter spacing
@@ -120,17 +110,17 @@ struct CarouselView: View {
                                 //  .minimumScaleFactor(0.5)
                                     .frame(minWidth: 0, maxWidth: (110 * 1.1) * scaleFactorWidth, minHeight: 19 * scaleFactorWidth, maxHeight: 19 * scaleFactorWidth)
                                     .opacity(item.madeAMove ? 1 : 0)
-
-                                Spacer()
-                                // Action text
-                                Text("Tap to answer")
-                                    .font(.system(size: 10 * scaleFactorWidth))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(Color(hex: "#A8AFB7"))
-                                    .frame(maxWidth: .infinity)
-                                    .multilineTextAlignment(.center)
-                                    .opacity(item.showActionText && item.isHidden ? 0.5 : 0)
                             }
+
+                            Spacer()
+                            // Action text
+                            Text("Tap to answer")
+                                .font(.system(size: 10 * scaleFactorWidth))
+                                .fontWeight(.bold)
+                                .foregroundColor(Color(hex: "#A8AFB7"))
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.center)
+                                .opacity(item.showActionText && item.isHidden ? 0.5 : 0)
 
                             VStack(spacing: 5 * scaleFactorWidth) {
                                 Spacer()
