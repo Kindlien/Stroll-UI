@@ -23,38 +23,38 @@ struct RecordingView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Segmented Tabs
-            HStack(spacing: 20) {
+            HStack(spacing: 20 * scaleFactorWidth) {
                 Rectangle()
                     .fill(Color(hex: "#B0B0B0"))
-                    .frame(height: 4)
+                    .frame(height: 4 * scaleFactorWidth)
                     .cornerRadius(100)
                 
                 Rectangle()
                     .fill(Color(hex: "#505050"))
-                    .frame(height: 4)
+                    .frame(height: 4 * scaleFactorWidth)
                     .cornerRadius(100)
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 5)
-            .padding(.top, 10)
+            .padding(.horizontal, 20 * scaleFactorWidth)
+            .padding(.bottom, 5 * scaleFactorWidth)
+            .padding(.top, 10 * scaleFactorWidth)
             // Header with back button and menu
             HStack {
                 Button(action: {
-                    withAnimation(.smooth()) {
+                    withAnimation(.easeInOut(duration: 0.4)) {
                         showRecordingView = false
                     }
                 }) {
                     VStack{
                         Image("back_ic")
                             .resizable()
-                            .frame(width: 6, height: 11)
+                            .frame(width: 6 * scaleFactorWidth, height: 11 * scaleFactorWidth)
                     }
-                    .frame(width: 44, height: 44)
+                    .frame(width: 44 * scaleFactorWidth, height: 44 * scaleFactorWidth)
                 }
                 
                 Spacer()
                 Text(item.title)
-                    .font(.system(size: 18).weight(.bold))
+                    .font(.system(size: 18 * scaleFactorWidth).weight(.bold))
                     .foregroundColor(Color(hex: "#FFFFFF"))
                     .multilineTextAlignment(.center)
                 
@@ -64,27 +64,27 @@ struct RecordingView: View {
                     VStack{
                         Image("menu_ic")
                             .resizable()
-                            .frame(width:22, height: 4.4)
+                            .frame(width: 22 * scaleFactorWidth, height: 4.4 * scaleFactorWidth)
                     }
-                    .frame(width: 44, height: 44)
+                    .frame(width: 44 * scaleFactorWidth, height: 44 * scaleFactorWidth)
                 }
             }
-            .padding(.horizontal, 15)
-            
+            .padding(.horizontal, 15 * scaleFactorWidth)
+
             Spacer()
             // Profile Info
-            VStack(spacing: 8) {
+            VStack(spacing: 8 * scaleFactorWidth) {
                 ZStack {
                     // Circle + profile image
                     ZStack {
                         Circle()
                             .fill(Color.black)
-                            .frame(width: 60, height: 60)
-                        
-                        item.image
+                            .frame(width: 60 * scaleFactorWidth, height: 60 * scaleFactorWidth)
+
+                        item.profileImage
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 50, height: 50)
+                            .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
                             .clipShape(Circle())
                     }
                     
@@ -92,27 +92,27 @@ struct RecordingView: View {
                     VStack {
                         Capsule()
                             .fill(Color(hex: "#121518").opacity(0.9)) // #121518E5
-                            .frame(width: 105, height: 20)
+                            .frame(width: 105 * scaleFactorWidth, height: 20 * scaleFactorWidth)
                             .overlay(
                                 Text("Stroll question")
-                                    .font(.system(size: 11, weight: .semibold))
+                                    .font(.system(size: 11 * scaleFactorWidth, weight: .semibold))
                                     .foregroundColor(Color(hex: "#F5F5F5"))
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 4)
+                                    .padding(.horizontal, 12 * scaleFactorWidth)
+                                    .padding(.vertical, 4 * scaleFactorWidth)
                             )
-                            .shadow(color: Color.black.opacity(0.3), radius: 16, y: 14)
-                            .offset(y: 30) // 10px overlap from bottom of circle (60/2 + 10)
+                            .shadow(color: Color.black.opacity(0.3), radius: 16 * scaleFactorWidth, y: 14 * scaleFactorWidth)
+                            .offset(y: 30 * scaleFactorWidth) // 10px overlap from bottom of circle (60/2 + 10)
                     }
-                    .frame(height: 60 + 10 + 20) // ensures enough vertical space
+                    .frame(height: (60 + 10 + 20) * scaleFactorWidth) // ensures enough vertical space
                 }
                 
                 Text(item.subtitle)
-                    .font(.system(size: 24).weight(.bold))
+                    .font(.system(size: 24 * scaleFactorWidth).weight(.bold))
                     .foregroundColor(Color(hex: "#F5F5F5"))
                     .multilineTextAlignment(.center)
                 
                 Text(item.subtitleAnswer)
-                    .font(.system(size: 13))
+                    .font(.system(size: 13 * scaleFactorWidth))
                     .foregroundColor(Color(hex: "#CBC9FF"))
                     .opacity(0.7)
                     .italic()
@@ -122,22 +122,22 @@ struct RecordingView: View {
             
             
             formattedDisplayTime
-                .padding(.vertical, 32) // ori 42
-            
+                .padding(.vertical, 34 * scaleFactorWidth) // ori 42
+
             // Waveform Display
-            WaveformView(audioRecorder: audioRecorder)
-                .frame(height: 21)
-                .padding(.leading, 35)
-                .padding(.trailing, 30)
-                .padding(.bottom, 35) // ori 45
-            
-            VStack(spacing: 22) {
+            WaveformView(audioRecorder: audioRecorder, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
+                .frame(height: 21 * scaleFactorWidth)
+                .padding(.leading, 35 * scaleFactorWidth)
+                .padding(.trailing, 35 * scaleFactorWidth)
+                .padding(.bottom, 37 * scaleFactorWidth) // ori 45
+
+            VStack(spacing: 22 * scaleFactorWidth) {
                 // Control Buttons
-                HStack(spacing: 40) {
+                HStack(spacing: 40 * scaleFactorWidth) {
                     // Delete Button
                     Button(action: audioRecorder.deleteRecording) {
                         Text("Delete")
-                            .font(.system(size: 17))
+                            .font(.system(size: 17 * scaleFactorWidth))
                             .foregroundColor(audioRecorder.canDelete ? Color(hex: "#F5F5F5") : Color(hex: "#5C6770"))
                     }
                     .disabled(!audioRecorder.canDelete)
@@ -146,23 +146,23 @@ struct RecordingView: View {
                     // Main Control Button
                     Button(action: handleMainAction) {
                         mainButtonContent
-                            .frame(width: 50, height: 50)
+                            .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
                     }
                     
                     
                     // Submit Button
                     Button(action: submitRecording) {
                         Text("Submit")
-                            .font(.system(size: 17))
+                            .font(.system(size: 17 * scaleFactorWidth))
                             .foregroundColor(audioRecorder.canSubmit ? Color(hex: "#F5F5F5") : Color(hex: "#5C6770"))
                     }
                     .disabled(!audioRecorder.canSubmit)
                 }
                 Text("Unmatch")
-                    .font(.system(size: 13))
+                    .font(.system(size: 13 * scaleFactorWidth))
                     .foregroundColor(Color(hex: "#BE2020"))
             }
-            .padding(.bottom, 33)
+            .padding(.bottom, 33 * scaleFactorWidth)
         }
         .background(
             ZStack {
@@ -184,6 +184,8 @@ struct RecordingView: View {
                 .ignoresSafeArea()
         )
         .foregroundColor(.white)
+        .scaleEffect(showRecordingView ? 1 : 0.8)
+        .opacity(showRecordingView ? 1 : 0)
     }
     
     private var formattedDisplayTime: some View {
@@ -191,34 +193,34 @@ struct RecordingView: View {
             Spacer()
             if audioRecorder.state == .playing {
                 Text(audioRecorder.formattedCurrentTime)
-                    .font(.system(size: 14))
+                    .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
                     .foregroundColor(Color(hex: "#B5B2FF"))
                 
                 Text(" / \(audioRecorder.formattedDuration)")
-                    .font(.system(size: 14))
+                    .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
                     .foregroundColor(Color(hex: "#AEADAF"))
             } else if audioRecorder.state == .stopped {
                 Text(audioRecorder.formattedCurrentTime)
-                    .font(.system(size: 14))
+                    .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
                     .foregroundColor(Color(hex: "#AEADAF"))
                 
                 Text(" / \(audioRecorder.formattedDuration)")
-                    .font(.system(size: 14))
+                    .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
                     .foregroundColor(Color(hex: "#AEADAF"))
             } else {
                 Text(audioRecorder.formattedTime)
-                    .font(.system(size: 14))
+                    .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
                     .foregroundColor(Color(hex: "#AEADAF"))
             }
             Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(.horizontal)
+        .padding(.horizontal, 10 * scaleFactorWidth)
     }
     
     private var mainButtonContent: some View {
@@ -228,49 +230,49 @@ struct RecordingView: View {
                 ZStack {
                     // Background circle
                     Circle()
-                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 1)
-                        .frame(width: 50, height: 50)
-                    
+                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 1 * scaleFactorWidth)
+                        .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
+
                     // Inner circle with stroke
                     Circle()
                         .fill(Color(hex: "#21204B"))
-                        .frame(width: 41.67, height: 41.67)
+                        .frame(width: 41.67 * scaleFactorWidth, height: 41.67 * scaleFactorWidth)
                 }
 
             case .countdown:
-                ProgressViewRecording(progress: $audioRecorder.countdownProgress, scaleFactorWidth: 1.0, scaleFactorHeight: 1.0)
+                ProgressViewRecording(progress: $audioRecorder.countdownProgress, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
 
             case .recording:
                 ZStack{
                     Circle()
-                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2)
-                        .frame(width: 50, height: 50)
-                    
+                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2 * scaleFactorWidth)
+                        .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
+
                     RoundedRectangle(cornerRadius: 2)
                         .fill(Color(hex: "#4F4CB1"))
-                        .frame(width: 18, height: 18)
+                        .frame(width: 18 * scaleFactorWidth, height: 18 * scaleFactorWidth)
                 }
 
             case .stopped:
                 ZStack{
                     Circle()
-                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2)
-                        .frame(width: 50, height: 50)
-                    
+                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2 * scaleFactorWidth)
+                        .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
+
                     Image(systemName: "play.fill")
                         .foregroundColor(Color(hex: "#4F4CB1"))
-                        .frame(width: 18, height: 20)
+                        .frame(width: 18 * scaleFactorWidth, height: 20 * scaleFactorWidth)
                 }
 
             case .playing:
                 ZStack{
                     Circle()
-                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2)
-                        .frame(width: 50, height: 50)
-                    
+                        .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2 * scaleFactorWidth)
+                        .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
+
                     Image(systemName: "pause.fill")
                         .foregroundColor(Color(hex: "#4F4CB1"))
-                        .frame(width: 18, height: 20)
+                        .frame(width: 18 * scaleFactorWidth, height: 20 * scaleFactorWidth)
                 }
             }
         }
@@ -295,7 +297,7 @@ struct RecordingView: View {
         audioRecorder.saveRecording()
         
         // Close recording view with animation
-        withAnimation(.smooth()) {
+        withAnimation(.easeInOut(duration: 0.4)) {
             showRecordingView = false
         }
         

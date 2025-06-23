@@ -193,12 +193,12 @@ struct CarouselView: View {
                         // Add removal animations
                         .opacity(viewModel.removedItems[item.id] == true ? 0 : 1)
                         .scaleEffect(viewModel.removedItems[item.id] == true ? 0.8 : 1)
-                        .animation(.easeOut(duration: 0.3), value: viewModel.removedItems[item.id])
+                        .animation(.easeInOut(duration: 0.4), value: viewModel.removedItems[item.id])
                     }
                 }
             }
             .padding(.horizontal, 10 * scaleFactorWidth)
         }
-        .animation(.smooth(), value: items)
+        .animation(.easeInOut(duration: 0.4), value: items)
     }
 }

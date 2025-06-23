@@ -30,12 +30,8 @@ struct HomeView: View {
                         scaleFactorWidth: scaleFactorWidth,
                         scaleFactorHeight: scaleFactorHeight
                     )
-//                    .matchedGeometryEffect(id: item.id, in: animationNamespace)
-//                    .zIndex(1)
-//                    .transition(.asymmetric(
-//                        insertion: .scale(scale: 0.8, anchor: .center).combined(with: .opacity),
-//                        removal: .scale(scale: 0.8).combined(with: .opacity)
-//                    ))
+                    .matchedGeometryEffect(id: item.id, in: animationNamespace)
+                    .zIndex(1)
                 } else {
                     ZStack(alignment: .bottom) {
                         ScrollView {
@@ -55,7 +51,7 @@ struct HomeView: View {
                                     selectedItemId: selectedCarouselItem?.id,
                                     showRecordingView: showRecordingView,
                                     onItemSelected: { item in
-                                        withAnimation(.smooth()) {
+                                        withAnimation(.easeInOut(duration: 0.3)) {
                                             selectedCarouselItem = item
                                             showRecordingView = true
                                         }
@@ -124,9 +120,6 @@ struct HomeView: View {
                     )
                 }
             }
-            .scaleEffect(showRecordingView ? 1 : 0.9)
-            .opacity(showRecordingView ? 1 : 0)
-            .animation(.spring(response: 0.3, dampingFraction: 1.0), value: showRecordingView)
         }
     }
 }

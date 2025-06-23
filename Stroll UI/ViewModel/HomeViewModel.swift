@@ -22,7 +22,8 @@ class HomeViewModel: ObservableObject {
             madeAMoveShort: false,
             imageHiddenTemp: Image("amanda_profile_placeholder_hidden"),
             subtitleAnswer: "\"Mine is definitely sneaking the late night snacks.\"",
-            imageRecording: Image("amanda_profile_placeholder_recording")
+            imageRecording: Image("amanda_profile_placeholder_recording"),
+            profileImage: Image("amanda_profile_recording")
         ),
         CarouselItem(
             title: "Malte, 31",
@@ -34,7 +35,8 @@ class HomeViewModel: ObservableObject {
             madeAMoveShort: false,
             imageHiddenTemp: Image("malte_profile_placeholder_hidden"),
             subtitleAnswer: "\"For me, it's definitely trust and honesty.\"",
-            imageRecording: Image("malte_profile_placeholder")
+            imageRecording: Image("malte_profile_placeholder"),
+            profileImage: Image("malte_profile_placeholder")
         ),
         CarouselItem(
             title: "Binghan, 29",
@@ -46,7 +48,8 @@ class HomeViewModel: ObservableObject {
             madeAMoveShort: false,
             imageHiddenTemp: Image("malte_profile_placeholder_hidden"),
             subtitleAnswer: "\"I would choose teleportation, so I can travel anywhere instantly.\"",
-            imageRecording: Image("binghan_profile_placeholder")
+            imageRecording: Image("binghan_profile_placeholder"),
+            profileImage: Image("binghan_profile_placeholder")
         )
     ]
 
@@ -68,7 +71,7 @@ class HomeViewModel: ObservableObject {
 
     func removeItem(itemId: UUID) {
         // Mark item for removal with animation
-        withAnimation(.easeOut(duration: 0.3)) {
+        withAnimation(.easeInOut(duration: 0.4)) {
             removedItems[itemId] = true
         }
 

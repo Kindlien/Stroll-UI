@@ -10,17 +10,18 @@ import SwiftUI
 // MARK: - Waveform Visualization
 struct WaveformView: View {
     @ObservedObject var audioRecorder: AudioRecorder
-    
+    let scaleFactorWidth: CGFloat
+    let scaleFactorHeight: CGFloat
     private let amplificationFactor: CGFloat = 50
     private let minSpikeHeight: CGFloat = 2
-    private let placeholderCount = 100
+    private let placeholderCount = 112
     private let defaultLineHeight: CGFloat = 1
     private let barSpacing: CGFloat = 1  // Add spacing between bars
     
     var body: some View {
         GeometryReader { geometry in
             let viewHeight = geometry.size.height
-            let fixedBarWidth: CGFloat = 2
+            let fixedBarWidth: CGFloat = 2 * scaleFactorWidth
             let sampleCount = audioRecorder.waveformData.count
             
             let totalBars = placeholderCount + sampleCount
@@ -33,10 +34,10 @@ struct WaveformView: View {
                         // Continuous baseline for the entire waveform
                         Rectangle()
                             .fill(Color(hex: "#36393E").opacity(0.95))
-                            .frame(width: UIScreen.main.bounds.width - 95, height: defaultLineHeight)
+                            .frame(width: UIScreen.main.bounds.width - 60 * scaleFactorWidth, height: defaultLineHeight * scaleFactorWidth)
                             .offset(y: viewHeight / 2) // Center vertically
 
-                        HStack(alignment: .center, spacing: barSpacing) {
+                        HStack(alignment: .center, spacing: barSpacing * scaleFactorWidth) {
                             ForEach(0..<totalBars, id: \.self) { index in
                                 let sampleIndex = index - placeholderCount
                                 let hasSample = sampleIndex >= 0 && sampleIndex < sampleCount
@@ -54,9 +55,9 @@ struct WaveformView: View {
                                     
                                     let barColor: Color = {
                                         switch audioRecorder.state {
-                                        case .stopped, .ready, .countdown(_):
+                                        case .ready, .countdown(_):
                                             return Color(hex: "#36393E").opacity(0.95)
-                                        case .playing, .recording:
+                                        case .stopped, .playing, .recording:
                                             if index == currentIndex {
                                                 return Color(hex: "#B5B2FF") // current wave form
                                             } else if index < currentIndex {
@@ -85,9 +86,9 @@ struct WaveformView: View {
                                 }
                             }
                         }
-                        .frame(width: contentWidth, height: viewHeight)
+                        .frame(width: contentWidth * scaleFactorWidth, height: viewHeight)
                     }
-                    .frame(width: contentWidth, height: viewHeight)
+                    .frame(width: contentWidth * scaleFactorWidth, height: viewHeight)
                     .onChange(of: currentIndex) { newIndex in
                         withAnimation(.easeOut) {
                             proxy.scrollTo(newIndex, anchor: .center)

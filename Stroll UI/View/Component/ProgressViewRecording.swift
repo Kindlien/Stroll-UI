@@ -16,13 +16,13 @@ struct ProgressViewRecording: View {
         ZStack {
             // Background circle (base color)
             Circle()
-                .strokeBorder(Color(hex: "#7B7B7B"), lineWidth: progress == 0 ? 2 : 1.4)
-                .frame(width: 50, height: 50)
-            
+                .strokeBorder(Color(hex: "#7B7B7B"), lineWidth: progress == 0 ? 2 * scaleFactorWidth : 1.4 * scaleFactorWidth)
+                .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
+
             RoundedRectangle(cornerRadius: 2)
                 .fill(Color(hex: "#7B7B7B"))
-                .frame(width: 18, height: 18)
-            
+                .frame(width: 18 * scaleFactorWidth, height: 18 * scaleFactorWidth)
+
             // Full Angular Gradient stroke
             Circle()
                 .trim(from: 0, to: progress) // Animate `progress` (0.0 to 1.0)
@@ -38,13 +38,13 @@ struct ProgressViewRecording: View {
                         startAngle: .degrees(-90), // Start from top
                         endAngle: .degrees(-90 + 360 * progress) // Match arc length
                     ),
-                    style: StrokeStyle(lineWidth: 3, lineCap: .round)
+                    style: StrokeStyle(lineWidth: 3 * scaleFactorWidth, lineCap: .round)
                 )
                 .shadow(color: Color.white.opacity(0.5), radius: 1) // subtle glow
                 .animation(.linear(duration: 0.1), value: progress)
-                .frame(width: 50, height: 50)
+                .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
         }
-        .frame(width: 50, height: 50)
-        
+        .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
+
     }
 }

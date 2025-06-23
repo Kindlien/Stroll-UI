@@ -20,4 +20,5 @@ struct CarouselItem: Identifiable, Equatable{
     let imageHiddenTemp: Image
     let subtitleAnswer: String
     let imageRecording: Image
+    let profileImage: Image
 }
