@@ -8,26 +8,33 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
-    @Published var carouselItems: [CarouselItem] = [
+    @Published var completedItemId: UUID?
+    @Published var removedItems: [UUID: Bool] = [:]
+    @Published var carouselItems: [CarouselItem] =
+    [
         CarouselItem(
             title: "Amanda, 22",
             subtitle: "What is your most favorite childhood memory?",
             showActionText: true,
-            isHidden: true,
+            isHidden: false,
             image: Image("amanda_profile_placeholder"),
             madeAMove: false,
             madeAMoveShort: false,
-            imageHiddenTemp: Image("amanda_profile_placeholder_hidden")
+            imageHiddenTemp: Image("amanda_profile_placeholder_hidden"),
+            subtitleAnswer: "\"Mine is definitely sneaking the late night snacks.\"",
+            imageRecording: Image("amanda_profile_placeholder_recording")
         ),
         CarouselItem(
             title: "Malte, 31",
             subtitle: "What is the most important quality in friendships to you?",
-            showActionText: true,
-            isHidden: true,
+            showActionText: false,
+            isHidden: false,
             image: Image("malte_profile_placeholder"),
-            madeAMove: true,
+            madeAMove: false,
             madeAMoveShort: false,
-            imageHiddenTemp: Image("malte_profile_placeholder_hidden")
+            imageHiddenTemp: Image("malte_profile_placeholder_hidden"),
+            subtitleAnswer: "\"For me, it's definitely trust and honesty.\"",
+            imageRecording: Image("malte_profile_placeholder")
         ),
         CarouselItem(
             title: "Binghan, 29",
@@ -36,8 +43,10 @@ class HomeViewModel: ObservableObject {
             isHidden: false,
             image: Image("binghan_profile_placeholder"),
             madeAMove: false,
-            madeAMoveShort: true,
-            imageHiddenTemp: Image("malte_profile_placeholder_hidden")
+            madeAMoveShort: false,
+            imageHiddenTemp: Image("malte_profile_placeholder_hidden"),
+            subtitleAnswer: "\"I would choose teleportation, so I can travel anywhere instantly.\"",
+            imageRecording: Image("binghan_profile_placeholder")
         )
     ]
 
@@ -52,4 +61,22 @@ class HomeViewModel: ObservableObject {
     @Published var selectedScreen = 2 // Default to Matches tab
     @Published var selectedTab = 0 // Default to Chats tab
     let tabs = ["Chats", "Pending"]
+
+    func markCompleted(itemId: UUID) {
+        completedItemId = itemId
+    }
+
+    func removeItem(itemId: UUID) {
+        // Mark item for removal with animation
+        withAnimation(.easeOut(duration: 0.3)) {
+            removedItems[itemId] = true
+        }
+
+        // Actually remove after animation completes
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.carouselItems.removeAll { $0.id == itemId }
+            self.completedItemId = nil
+            self.removedItems[itemId] = nil
+        }
+    }
 }

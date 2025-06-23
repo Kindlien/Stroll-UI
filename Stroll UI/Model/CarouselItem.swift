@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CarouselItem: Identifiable {
+struct CarouselItem: Identifiable, Equatable{
     let id = UUID()
     let title: String
     let subtitle: String
@@ -18,4 +18,6 @@ struct CarouselItem: Identifiable {
     let madeAMove: Bool
     let madeAMoveShort: Bool
     let imageHiddenTemp: Image
+    let subtitleAnswer: String
+    let imageRecording: Image
 }
