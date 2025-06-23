@@ -127,7 +127,8 @@ struct RecordingView: View {
             // Waveform Display
             WaveformView(audioRecorder: audioRecorder)
                 .frame(height: 21)
-                .padding(.horizontal, 35)
+                .padding(.leading, 35)
+                .padding(.trailing, 30)
                 .padding(.bottom, 35) // ori 45
             
             VStack(spacing: 22) {
