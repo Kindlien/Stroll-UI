@@ -5,7 +5,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need this to record your audio so you can answer your matches</string>
     <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
+    <string>Dark</string>
     <key>AVAudioSessionCategory</key>
     <string>AVAudioSessionCategoryPlayAndRecord</string>
 	<key>UIAppFonts</key>
