@@ -110,14 +110,14 @@ struct RecordingView: View {
             
             
             formattedDisplayTime
-                .padding(.vertical, 34 * scaleFactorWidth) // ori 42
+                .padding(.vertical, 36 * scaleFactorWidth) // ori 42
 
             // Waveform Display
             WaveformView(audioRecorder: audioRecorder, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
-                .frame(height: 21 * scaleFactorWidth)
+                .frame(height: 15 * scaleFactorWidth)
                 .padding(.leading, 35 * scaleFactorWidth)
                 .padding(.trailing, 35 * scaleFactorWidth)
-                .padding(.bottom, 37 * scaleFactorWidth) // ori 45
+                .padding(.bottom, 39 * scaleFactorWidth) // ori 45
 
             VStack(spacing: 22 * scaleFactorWidth) {
                 // Control Buttons
