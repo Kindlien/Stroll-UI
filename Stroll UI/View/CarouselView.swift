@@ -142,7 +142,7 @@ struct CarouselView: View {
                                     Text(item.subtitle)
                                         .font(.custom("ProximaNova-reguler", size: 10 * scaleFactorWidth))
                                         .foregroundColor(Color(hex: "#CFCFFE"))
-                                        .opacity(item.isHidden ? 0.65 : 1)
+                                        .opacity(item.isHidden || item.isDimText ? 0.65 : 1)
                                         .padding(.horizontal,
                                                  scaleFactorWidth >= 1.1 ? 15 :  scaleFactorWidth > 1.0 ? 12 * scaleFactorWidth :
                                                     scaleFactorWidth == 1.0 ? (isSimulator ? 12 * scaleFactorWidth : 7 * scaleFactorWidth) :
@@ -179,14 +179,16 @@ struct CarouselView: View {
                                 }
                             }
                         }
-                        .matchedGeometryEffect(id: item.id, in: animationNamespace)
+                        .matchedGeometryEffect(id: "profile_\(item.id)", in: animationNamespace)
                         .onTapGesture {
                             let isSelectedAndRecording = showRecordingView && selectedItemId == item.id
                             let isCompleted = viewModel.completedItemId == item.id
                             let isRemoved = viewModel.removedItems[item.id] == true
 
                             if !isSelectedAndRecording && !isCompleted && !isRemoved {
-                                onItemSelected(item)
+                                withAnimation(.easeInOut(duration: 0.4)) {
+                                    onItemSelected(item)
+                                }
                             }
                         }
                         // Add removal animations
@@ -198,6 +200,5 @@ struct CarouselView: View {
             }
             .padding(.horizontal, 10 * scaleFactorWidth)
         }
-        .animation(.easeInOut(duration: 0.4), value: items)
     }
 }

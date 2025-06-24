@@ -16,6 +16,7 @@ struct SplashView: View {
             Image("AppIconImage")
                 .resizable()
                 .frame(width: 100, height: 100)
+                .cornerRadius(20)
                 .scaleEffect(isAnimating ? 1 : 0.5)  // Animate the scale
                 .animation(.easeOut(duration: 1.0), value: isAnimating)
                 .onAppear {

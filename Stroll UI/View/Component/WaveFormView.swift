@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - Waveform Visualization
 struct WaveformView: View {
     @ObservedObject var audioRecorder: AudioRecorder
+    @State private var lastScrollUpdate: Date = .distantPast
     let scaleFactorWidth: CGFloat
     let scaleFactorHeight: CGFloat
     private let amplificationFactor: CGFloat = 50
@@ -63,9 +64,9 @@ struct WaveformView: View {
 
                                     let barColor: Color = {
                                         switch audioRecorder.state {
-                                        case .ready, .countdown(_):
+                                        case .ready, .minimalRecording(progress: _), .recording:
                                             return Color(hex: "#36393E").opacity(0.95)
-                                        case .stopped, .playing, .recording:
+                                        case .stopped, .playing :
                                             if index == currentIndex {
                                                 return Color(hex: "#B5B2FF") // current wave form
                                             } else if index < currentIndex {
@@ -98,8 +99,16 @@ struct WaveformView: View {
                     }
                     .frame(width: contentWidth * scaleFactorWidth, height: viewHeight)
                     .onChange(of: currentIndex) { newIndex in
-                        withAnimation(.easeOut) {
-                            proxy.scrollTo(newIndex, anchor: .center)
+                        let now = Date()
+                        let threshold: TimeInterval = 0.0 // 150ms throttle
+
+                        if now.timeIntervalSince(lastScrollUpdate) > threshold {
+                            lastScrollUpdate = now
+
+                            switch audioRecorder.state {
+                            default:
+                                proxy.scrollTo(newIndex, anchor: .center)
+                            }
                         }
                     }
                     .onAppear {
@@ -113,9 +122,10 @@ struct WaveformView: View {
     }
 
     private func calculateCurrentIndex(totalBars: Int) -> Int {
-        if audioRecorder.state == .recording {
+        switch audioRecorder.state {
+        case .recording, .minimalRecording:
             return placeholderCount + audioRecorder.waveformData.count - 1
-        } else {
+        default:
             let sampleRate = 0.1
             guard sampleRate > 0, audioRecorder.totalDuration > 0 else {
                 return placeholderCount > 0 ? placeholderCount - 1 : 0

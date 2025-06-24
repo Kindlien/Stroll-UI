@@ -21,4 +21,5 @@ struct CarouselItem: Identifiable, Equatable{
     let subtitleAnswer: String
     let imageRecording: Image
     let profileImage: Image
+    let isDimText: Bool
 }

@@ -23,7 +23,8 @@ class HomeViewModel: ObservableObject {
             imageHiddenTemp: Image("amanda_profile_placeholder_hidden"),
             subtitleAnswer: "\"Mine is definitely sneaking the late night snacks.\"",
             imageRecording: Image("amanda_profile_placeholder_recording"),
-            profileImage: Image("amanda_profile_recording")
+            profileImage: Image("amanda_profile_recording"),
+            isDimText: true
         ),
         CarouselItem(
             title: "Malte, 31",
@@ -36,7 +37,8 @@ class HomeViewModel: ObservableObject {
             imageHiddenTemp: Image("malte_profile_placeholder_hidden"),
             subtitleAnswer: "\"For me, it's definitely trust and honesty.\"",
             imageRecording: Image("malte_profile_placeholder"),
-            profileImage: Image("malte_profile_placeholder")
+            profileImage: Image("malte_profile_placeholder"),
+            isDimText: true
         ),
         CarouselItem(
             title: "Binghan, 29",
@@ -49,7 +51,8 @@ class HomeViewModel: ObservableObject {
             imageHiddenTemp: Image("malte_profile_placeholder_hidden"),
             subtitleAnswer: "\"I would choose teleportation, so I can travel anywhere instantly.\"",
             imageRecording: Image("binghan_profile_placeholder"),
-            profileImage: Image("binghan_profile_placeholder")
+            profileImage: Image("binghan_profile_placeholder"),
+            isDimText: false
         )
     ]
 

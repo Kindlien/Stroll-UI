@@ -13,8 +13,8 @@ import AVFoundation
 class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     enum State: Equatable {
         case ready
-        case countdown(Int)
-        case recording
+        case minimalRecording(progress: Double)  // New state for 15-second minimal period
+        case recording                           // After 15 seconds
         case stopped
         case playing
     }
@@ -121,26 +121,28 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
     }
 
     func startCountdown() {
-        print("Starting countdown...")
+        print("Starting minimal recording period...")
         countdownProgress = 0.0
-        state = .countdown(3)
+        state = .minimalRecording(progress: countdownProgress)
 
-        let duration: TimeInterval = 3.0
+        let minimalDuration: TimeInterval = 15.0
         let interval: TimeInterval = 0.01
-        var elapsed: TimeInterval = 0.0
+        let startTime = CACurrentMediaTime()
 
+        countdownTimer?.invalidate()
         countdownTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { [weak self] timer in
             guard let self = self else { timer.invalidate(); return }
 
-            elapsed += interval
-            self.countdownProgress = elapsed / duration
+            let elapsed = CACurrentMediaTime() - startTime
+            self.countdownProgress = elapsed / minimalDuration
 
-            if elapsed >= duration {
+            if elapsed >= minimalDuration {
                 timer.invalidate()
                 self.state = .recording
-                self.startRecording()
             }
         }
+
+        startRecording()
     }
 
     func cancelCountdown() {
