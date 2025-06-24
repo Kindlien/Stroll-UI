@@ -12,7 +12,7 @@ struct SplashView: View {
     @State private var isAnimating = false
 
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             Image("AppIconImage")
                 .resizable()
                 .frame(width: 100, height: 100)
