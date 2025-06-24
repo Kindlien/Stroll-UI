@@ -25,7 +25,7 @@ struct HomeView: View {
             GeometryReader { geometry in
                 let scaleFactorWidth = geometry.size.width / 390 // iphone 14 base
                 let scaleFactorHeight = geometry.size.height / 844 // iphone 14 base
-
+                
                 ZStack {
                     if let item = selectedCarouselItem, showRecordingView {
                         RecordingView(
@@ -41,7 +41,7 @@ struct HomeView: View {
                             scaleFactorHeight: scaleFactorHeight, animationNamespace: animationNamespace
                         )
                         .zIndex(2)
-
+                        
                     } else {
                         ZStack(alignment: .bottom) {
                             ScrollView {

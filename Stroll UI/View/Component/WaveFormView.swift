@@ -100,7 +100,7 @@ struct WaveformView: View {
                     .frame(width: contentWidth * scaleFactorWidth, height: viewHeight)
                     .onChange(of: currentIndex) { newIndex in
                         let now = Date()
-                        let threshold: TimeInterval = 0.0 // 150ms throttle
+                        let threshold: TimeInterval = 0.0 // throttle time for scrolling updates
 
                         if now.timeIntervalSince(lastScrollUpdate) > threshold {
                             lastScrollUpdate = now

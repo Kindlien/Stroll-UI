@@ -20,12 +20,12 @@ struct RecordingView: View {
     let scaleFactorHeight: CGFloat
     let animationNamespace: Namespace.ID
     private let tabs = ["Details", "Info"]
-
+    
     var body: some View {
         VStack(spacing: 0) {
             // Segmented Tabs
             SegmentedTabBar(selectedIndex: $selectedTab, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
-
+            
             // Header with back button and menu
             HStack {
                 Button(action: {
@@ -40,15 +40,15 @@ struct RecordingView: View {
                     }
                     .frame(width: 44 * scaleFactorWidth, height: 44 * scaleFactorWidth)
                 }
-
+                
                 Spacer()
                 Text(item.title)
                     .font(.system(size: 18 * scaleFactorWidth).weight(.bold))
                     .foregroundColor(Color(hex: "#FFFFFF"))
                     .multilineTextAlignment(.center)
-
+                
                 Spacer()
-
+                
                 Button(action: {}) {
                     VStack{
                         Image("menu_ic")
@@ -59,7 +59,7 @@ struct RecordingView: View {
                 }
             }
             .padding(.horizontal, 15 * scaleFactorWidth)
-
+            
             Spacer()
             // Profile Info
             VStack(spacing: 8 * scaleFactorWidth) {
@@ -69,7 +69,7 @@ struct RecordingView: View {
                         Circle()
                             .fill(Color.black)
                             .frame(width: 60 * scaleFactorWidth, height: 60 * scaleFactorWidth)
-
+                        
                         item.profileImage
                             .resizable()
                             .scaledToFill()
@@ -77,7 +77,7 @@ struct RecordingView: View {
                             .clipShape(Circle())
                             .matchedGeometryEffect(id: "profile_\(item.id)", in: animationNamespace)
                     }
-
+                    
                     // Capsule below with 10px overlap
                     VStack {
                         Capsule()
@@ -95,12 +95,12 @@ struct RecordingView: View {
                     }
                     .frame(height: (60 + 10 + 20) * scaleFactorWidth) // ensures enough vertical space
                 }
-
+                
                 Text(item.subtitle)
                     .font(.system(size: 24 * scaleFactorWidth).weight(.bold))
                     .foregroundColor(Color(hex: "#F5F5F5"))
                     .multilineTextAlignment(.center)
-
+                
                 Text(item.subtitleAnswer)
                     .font(.system(size: 13 * scaleFactorWidth))
                     .foregroundColor(Color(hex: "#CBC9FF"))
@@ -109,18 +109,18 @@ struct RecordingView: View {
                     .multilineTextAlignment(.center)
             }
             .padding(.horizontal)
-
-
+            
+            
             formattedDisplayTime
                 .padding(.vertical, 36 * scaleFactorWidth) // ori 42
-
+            
             // Waveform Display
             WaveformView(audioRecorder: audioRecorder, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
                 .frame(height: 15 * scaleFactorWidth)
                 .padding(.leading, 35 * scaleFactorWidth)
                 .padding(.trailing, 35 * scaleFactorWidth)
                 .padding(.bottom, 39 * scaleFactorWidth) // ori 45
-
+            
             VStack(spacing: 22 * scaleFactorWidth) {
                 // Control Buttons
                 HStack(spacing: 40 * scaleFactorWidth) {
@@ -131,14 +131,14 @@ struct RecordingView: View {
                             .foregroundColor(audioRecorder.canDelete ? Color(hex: "#F5F5F5") : Color(hex: "#5C6770"))
                     }
                     .disabled(!audioRecorder.canDelete)
-
+                    
                     // Main Control Button
                     Button(action: handleMainAction) {
                         mainButtonContent
                             .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
                     }
-
-
+                    
+                    
                     // Submit Button
                     Button(action: submitRecording) {
                         Text("Submit")
@@ -160,10 +160,10 @@ struct RecordingView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(height: UIScreen.main.bounds.height * 0.70)
-
+                    
                     Spacer()
                 }
-
+                
                 VStack {
                     Image("recording_overlay")
                         .resizable()
@@ -174,7 +174,7 @@ struct RecordingView: View {
         )
         .foregroundColor(.white)
     }
-
+    
     private var formattedDisplayTime: some View {
         HStack(spacing: 0) {
             Spacer()
@@ -183,7 +183,7 @@ struct RecordingView: View {
                     .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
                     .foregroundColor(Color(hex: "#B5B2FF"))
-
+                
                 Text(" / \(audioRecorder.formattedDuration)")
                     .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
@@ -193,7 +193,7 @@ struct RecordingView: View {
                     .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
                     .foregroundColor(Color(hex: "#AEADAF"))
-
+                
                 Text(" / \(audioRecorder.formattedDuration)")
                     .font(.system(size: 14 * scaleFactorWidth))
                     .fontWeight(.regular)
@@ -209,7 +209,7 @@ struct RecordingView: View {
         .frame(maxWidth: .infinity, alignment: .trailing)
         .padding(.horizontal, 10 * scaleFactorWidth)
     }
-
+    
     private var mainButtonContent: some View {
         Group {
             switch audioRecorder.state {
@@ -219,48 +219,48 @@ struct RecordingView: View {
                     Circle()
                         .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 1 * scaleFactorWidth)
                         .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
-
+                    
                     // Inner circle with stroke
                     Circle()
                         .fill(Color(hex: "#4F4CB1"))
                         .frame(width: 41.67 * scaleFactorWidth, height: 41.67 * scaleFactorWidth)
                 }
-
+                
             case .minimalRecording(_):
                 ProgressViewRecording(
                     progress: $audioRecorder.countdownProgress,
                     scaleFactorWidth: scaleFactorWidth,
                     scaleFactorHeight: scaleFactorHeight
                 )
-
+                
             case .recording:
                 ZStack{
                     Circle()
                         .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2 * scaleFactorWidth)
                         .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
-
+                    
                     RoundedRectangle(cornerRadius: 2)
                         .fill(Color(hex: "#4F4CB1"))
                         .frame(width: 18 * scaleFactorWidth, height: 18 * scaleFactorWidth)
                 }
-
+                
             case .stopped:
                 ZStack{
                     Circle()
                         .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2 * scaleFactorWidth)
                         .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
-
+                    
                     Image(systemName: "play.fill")
                         .foregroundColor(Color(hex: "#4F4CB1"))
                         .frame(width: 18 * scaleFactorWidth, height: 20 * scaleFactorWidth)
                 }
-
+                
             case .playing:
                 ZStack{
                     Circle()
                         .strokeBorder(Color(hex: "#B4B4B4"), lineWidth: 2 * scaleFactorWidth)
                         .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
-
+                    
                     Image(systemName: "pause.fill")
                         .foregroundColor(Color(hex: "#4F4CB1"))
                         .frame(width: 18 * scaleFactorWidth, height: 20 * scaleFactorWidth)
@@ -268,7 +268,7 @@ struct RecordingView: View {
             }
         }
     }
-
+    
     private func handleMainAction() {
         switch audioRecorder.state {
         case .ready:
@@ -284,15 +284,15 @@ struct RecordingView: View {
             audioRecorder.pauseRecording()
         }
     }
-
+    
     private func submitRecording() {
         audioRecorder.saveRecording()
-
+        
         // Close recording view with animation
         withAnimation(.easeInOut(duration: 0.5)) {
             showRecordingView = false
         }
-
+        
         // Trigger completion handler (which shows checkmark)
         onComplete()
     }
