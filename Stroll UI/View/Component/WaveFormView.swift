@@ -17,17 +17,17 @@ struct WaveformView: View {
     private let placeholderCount = 112
     private let defaultLineHeight: CGFloat = 1
     private let barSpacing: CGFloat = 1  // Add spacing between bars
-    
+
     var body: some View {
         GeometryReader { geometry in
             let viewHeight = geometry.size.height
             let fixedBarWidth: CGFloat = 2 * scaleFactorWidth
             let sampleCount = audioRecorder.waveformData.count
-            
+
             let totalBars = placeholderCount + sampleCount
             let contentWidth = CGFloat(totalBars) * fixedBarWidth + CGFloat(max(0, totalBars - 1)) * barSpacing
             let currentIndex = calculateCurrentIndex(totalBars: totalBars)
-            
+
             ScrollView(.horizontal, showsIndicators: false) {
                 ScrollViewReader { proxy in
                     ZStack(alignment: .topLeading) {
@@ -41,18 +41,26 @@ struct WaveformView: View {
                             ForEach(0..<totalBars, id: \.self) { index in
                                 let sampleIndex = index - placeholderCount
                                 let hasSample = sampleIndex >= 0 && sampleIndex < sampleCount
-                                
+
                                 if hasSample {
                                     // Get sample value
                                     let sample = audioRecorder.waveformData[sampleIndex]
-                                    
+
                                     // Calculate bar heights
+                                    // TODO: Optional Normalization of bar height to make the spikes more or less sensitive to the audio
+                                    //                                    let allSamples = audioRecorder.waveformData
+                                    //                                    let minSample = allSamples.min() ?? 0
+                                    //                                    let maxSample = allSamples.max() ?? 1
+                                    //                                    let normalizedRaw = (sample - minSample) / max((maxSample - minSample), 0.001)
+                                    //                                    let normalized = pow(normalizedRaw, 0.6) // Adjust this value (0.3–0.6) to tune compression
+                                    //                                    let spikeHalfHeight = max(minSpikeHeight, normalized * viewHeight / 2)
+
                                     let allSamples = audioRecorder.waveformData
                                     let minSample = allSamples.min() ?? 0
                                     let maxSample = allSamples.max() ?? 1
                                     let normalized = (sample - minSample) / (maxSample - minSample)
                                     let spikeHalfHeight = max(minSpikeHeight, normalized * viewHeight / 2)
-                                    
+
                                     let barColor: Color = {
                                         switch audioRecorder.state {
                                         case .ready, .countdown(_):
@@ -67,7 +75,7 @@ struct WaveformView: View {
                                             }
                                         }
                                     }()
-                                    
+
                                     // Sample bar with separation
                                     VStack(spacing: 0) {
                                         Rectangle()
@@ -103,7 +111,7 @@ struct WaveformView: View {
             }
         }
     }
-    
+
     private func calculateCurrentIndex(totalBars: Int) -> Int {
         if audioRecorder.state == .recording {
             return placeholderCount + audioRecorder.waveformData.count - 1
@@ -112,7 +120,7 @@ struct WaveformView: View {
             guard sampleRate > 0, audioRecorder.totalDuration > 0 else {
                 return placeholderCount > 0 ? placeholderCount - 1 : 0
             }
-            
+
             let sampleIndex = Int(audioRecorder.currentPlaybackTime / sampleRate)
             let clampedIndex = min(sampleIndex, audioRecorder.waveformData.count - 1)
             return placeholderCount + clampedIndex
