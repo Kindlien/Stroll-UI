@@ -48,7 +48,6 @@ struct HeaderView: View {
                     .frame(width: 50 * scaleFactorWidth, height: 50 * scaleFactorWidth)
                     .blur(radius: 20)
                     .rotationEffect(.degrees(22.95))
-//                    .offset(x: -6.3, y: 10.8)
 
                 Image("profilePic_icon")
                     .resizable()

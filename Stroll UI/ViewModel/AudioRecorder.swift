@@ -55,7 +55,6 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
     }
 
     private func setupRecorder() {
-        // FIXED: Create new file URL each time
         let fileName = "recording_\(Date().timeIntervalSince1970).m4a"
         let path = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
         recordingURL = path
@@ -80,7 +79,6 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
         }
     }
 
-    // FIXED: Reset all state
     private func resetState() {
         state = .ready
         elapsedTime = 0
@@ -186,7 +184,6 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
         currentPlaybackTime = 0  // Reset playback position
     }
 
-    // In playRecording():
     func playRecording() {
         guard let url = recordingURL else { return }
 
@@ -225,7 +222,6 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
     }
 
     func deleteRecording() {
-        // FIXED: Complete cleanup
         recorder?.stop()
         player?.stop()
         timer?.invalidate()
@@ -236,7 +232,6 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
             try? FileManager.default.removeItem(at: url)
         }
 
-        // FIXED: Reset all state
         resetState()
         prepareRecording()
     }
@@ -246,7 +241,6 @@ class AudioRecorder: NSObject, ObservableObject, AVAudioRecorderDelegate, AVAudi
     }
 
     // MARK: - Player Delegate
-    // In audioPlayerDidFinishPlaying():
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         currentPlaybackTime = 0
         state = .stopped

@@ -23,20 +23,8 @@ struct RecordingView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Segmented Tabs
-            HStack(spacing: 20 * scaleFactorWidth) {
-                Rectangle()
-                    .fill(Color(hex: "#B0B0B0"))
-                    .frame(height: 4 * scaleFactorWidth)
-                    .cornerRadius(100)
-                
-                Rectangle()
-                    .fill(Color(hex: "#505050"))
-                    .frame(height: 4 * scaleFactorWidth)
-                    .cornerRadius(100)
-            }
-            .padding(.horizontal, 20 * scaleFactorWidth)
-            .padding(.bottom, 5 * scaleFactorWidth)
-            .padding(.top, 10 * scaleFactorWidth)
+            SegmentedTabBar(selectedIndex: $selectedTab, scaleFactorWidth: scaleFactorWidth, scaleFactorHeight: scaleFactorHeight)
+
             // Header with back button and menu
             HStack {
                 Button(action: {
@@ -91,7 +79,7 @@ struct RecordingView: View {
                     // Capsule below with 10px overlap
                     VStack {
                         Capsule()
-                            .fill(Color(hex: "#121518").opacity(0.9)) // #121518E5
+                            .fill(Color(hex: "#121518").opacity(0.9))
                             .frame(width: 105 * scaleFactorWidth, height: 20 * scaleFactorWidth)
                             .overlay(
                                 Text("Stroll question")
@@ -141,8 +129,7 @@ struct RecordingView: View {
                             .foregroundColor(audioRecorder.canDelete ? Color(hex: "#F5F5F5") : Color(hex: "#5C6770"))
                     }
                     .disabled(!audioRecorder.canDelete)
-                    
-                    
+
                     // Main Control Button
                     Button(action: handleMainAction) {
                         mainButtonContent

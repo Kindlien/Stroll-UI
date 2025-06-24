@@ -117,7 +117,6 @@ struct CarouselView: View {
                                         .cornerRadius(10)
                                         .shadow(color: Color.gray.opacity(0.6), radius: 15.3)
                                         .lineLimit(1)
-                                    //  .minimumScaleFactor(0.5)
                                         .frame(minWidth: 0, maxWidth: (110 * 1.1) * scaleFactorWidth, minHeight: 19 * scaleFactorWidth, maxHeight: 19 * scaleFactorWidth)
                                         .opacity(item.madeAMove ? 1 : 0)
                                 }
