@@ -23,9 +23,9 @@ struct HomeView: View {
                 }
         } else {
             GeometryReader { geometry in
-                let scaleFactorWidth = geometry.size.width / 390 // iphone 14 base
-                let scaleFactorHeight = geometry.size.height / 844 // iphone 14 base
-                
+                let scaleFactorWidth = Scaler.scale(for: geometry).width // dynamic width scaler
+                let scaleFactorHeight = Scaler.scale(for: geometry).height // dynamic height scaler
+
                 ZStack {
                     if let item = selectedCarouselItem, showRecordingView {
                         RecordingView(

@@ -21,7 +21,7 @@ struct CarouselView: View {
     let selectedItemId: UUID?
     let showRecordingView: Bool
     var onItemSelected: (CarouselItem) -> Void
-
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 18 * scaleFactorWidth) {
@@ -55,7 +55,7 @@ struct CarouselView: View {
                                 //                                .frame(width: 145 * 1.05, height: 205 * 1.05)
                                 //                                .cornerRadius(20)
                                 //                            }
-
+                                
                                 item.imageHiddenTemp
                                     .resizable()
                                     .scaledToFill()
@@ -89,7 +89,7 @@ struct CarouselView: View {
                                         .scaledToFill()
                                 )
                             }
-
+                            
                             VStack(spacing: 23  * scaleFactorWidth) {
                                 // Made a move display
                                 if item.madeAMoveShort {
@@ -98,12 +98,12 @@ struct CarouselView: View {
                                             Circle()
                                                 .fill(Color(hex: "#0B0C0D"))
                                                 .frame(width: 24 * scaleFactorWidth, height: 24 * scaleFactorWidth)
-
+                                            
                                             Text("📣")
                                                 .font(.system(size: 12 * scaleFactorWidth))
                                         }
                                         .padding(.horizontal, 5 * scaleFactorWidth)
-
+                                        
                                         Spacer()
                                     }
                                 } else {
@@ -120,9 +120,9 @@ struct CarouselView: View {
                                         .frame(minWidth: 0, maxWidth: (110 * 1.1) * scaleFactorWidth, minHeight: 19 * scaleFactorWidth, maxHeight: 19 * scaleFactorWidth)
                                         .opacity(item.madeAMove ? 1 : 0)
                                 }
-
+                                
                                 Spacer()
-
+                                
                                 // Action text
                                 Text("Tap to answer")
                                     .font(.system(size: 10 * scaleFactorWidth))
@@ -131,14 +131,14 @@ struct CarouselView: View {
                                     .frame(maxWidth: .infinity)
                                     .multilineTextAlignment(.center)
                                     .opacity(item.showActionText && item.isHidden ? 0.5 : 0)
-
+                                
                                 VStack(spacing: 5 * scaleFactorWidth) {
                                     Spacer()
                                     Text(item.title)
                                         .font(.system(size: 15 * scaleFactorWidth).weight(.bold))
                                         .foregroundColor(.white)
                                         .multilineTextAlignment(.center)
-
+                                    
                                     Text(item.subtitle)
                                         .font(.custom("ProximaNova-reguler", size: 10 * scaleFactorWidth))
                                         .foregroundColor(Color(hex: "#CFCFFE"))
@@ -156,7 +156,7 @@ struct CarouselView: View {
                             .padding(.vertical, 50 * scaleFactorWidth)
                             .padding(.horizontal, 5 * scaleFactorWidth)
                             .frame(width: (145 * 1.05) * scaleFactorWidth, height: (205 * 1.05) * scaleFactorWidth)
-
+                            
                             if item.id == viewModel.completedItemId {
                                 ZStack {
                                     // Background Blur Circle
@@ -170,7 +170,7 @@ struct CarouselView: View {
                                                 .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: -2) // inset shadow approximation
                                         )
                                         .blur(radius: 10) // Optional slight blur for glow effect
-
+                                    
                                     // Checkmark image
                                     Image("checkmark_ic")
                                         .resizable()
@@ -184,7 +184,7 @@ struct CarouselView: View {
                             let isSelectedAndRecording = showRecordingView && selectedItemId == item.id
                             let isCompleted = viewModel.completedItemId == item.id
                             let isRemoved = viewModel.removedItems[item.id] == true
-
+                            
                             if !isSelectedAndRecording && !isCompleted && !isRemoved {
                                 withAnimation(.easeInOut(duration: 0.4)) {
                                     onItemSelected(item)
