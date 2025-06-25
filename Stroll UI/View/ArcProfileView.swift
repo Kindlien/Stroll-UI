@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ArcProgressView: View {
+struct ArcProfileView: View {
     let progress: Double // 0.0 to 1.0, e.g., 0.9 for 90%
 
     var body: some View {

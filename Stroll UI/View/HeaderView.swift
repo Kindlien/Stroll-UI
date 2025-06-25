@@ -40,7 +40,7 @@ struct HeaderView: View {
             Spacer()
             
             // TODO: Functionality Work In Progress, Replace Arc_Temp with ArcProgressView when ready
-            // ArcProgressView(progress: 0.9)
+            // ArcProfileView(progress: 0.9)
             ZStack {
                 // Profile picture
                 Circle()
